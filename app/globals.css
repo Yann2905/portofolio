@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap");
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  height: 100%;
+  background: #0a0a0f;
+  color: #f5f5f7;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  overscroll-behavior: none;
+}
+
+/* Custom scrollbar hidden inside the phone */
+.phone-scroll::-webkit-scrollbar {
+  display: none;
+}
+.phone-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Ambient background */
+.ambient-bg {
+  background:
+    radial-gradient(circle at 20% 10%, rgba(124, 92, 255, 0.18), transparent 45%),
+    radial-gradient(circle at 80% 90%, rgba(0, 224, 199, 0.12), transparent 50%),
+    #06060a;
+}
+
+/* Tap feedback utility */
+.tap {
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+.tap:active {
+  transform: scale(0.96);
+  opacity: 0.85;
+}
