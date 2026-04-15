@@ -6,6 +6,9 @@ import { connectDB } from "@/lib/db";
 import { Config } from "@/lib/models/Config";
 import { configSchema } from "@/lib/validation";
 
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     await connectDB();
@@ -32,16 +35,32 @@ export async function PUT(req: Request) {
       );
     }
     await connectDB();
-    const updated = await Config.findOneAndUpdate(
-      { key: "site" },
-      { key: "site", theme: parsed.data.theme },
-      { new: true, upsert: true }
-    );
-    revalidatePath("/");
-    revalidatePath("/admin");
-    return NextResponse.json({ theme: updated.theme });
+
+    const existing = await Config.findOne({ key: "site" });
+    let theme: "dark" | "light";
+    if (existing) {
+      existing.theme = parsed.data.theme;
+      await existing.save();
+      theme = existing.theme;
+    } else {
+      const created = await Config.create({
+        key: "site",
+        theme: parsed.data.theme,
+      });
+      theme = created.theme;
+    }
+
+    try {
+      revalidatePath("/", "layout");
+      revalidatePath("/admin", "layout");
+    } catch (re) {
+      console.error("[revalidatePath]", re);
+    }
+
+    return NextResponse.json({ theme });
   } catch (e) {
+    const msg = (e as Error).message || "Server error";
     console.error("[PUT /api/config]", e);
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
+    return NextResponse.json({ error: msg }, { status: 500 });
   }
 }
