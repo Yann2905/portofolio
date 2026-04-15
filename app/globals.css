@@ -74,27 +74,49 @@ body {
 
 /* Light mode adapts existing `*-white/X` utilities to a dark-on-light palette
    without rewriting every component. The dark mode classes remain untouched. */
-:root.light .text-white {
-  color: rgb(var(--fg));
-}
+:root.light .text-white { color: rgb(var(--fg)); }
 :root.light .text-white\/90 { color: rgb(var(--fg) / 0.95); }
-:root.light .text-white\/80 { color: rgb(var(--fg) / 0.85); }
-:root.light .text-white\/70 { color: rgb(var(--fg) / 0.75); }
-:root.light .text-white\/60 { color: rgb(var(--fg) / 0.65); }
-:root.light .text-white\/50 { color: rgb(var(--fg-muted) / 0.85); }
-:root.light .text-white\/40 { color: rgb(var(--fg-muted) / 0.75); }
-:root.light .text-white\/30 { color: rgb(var(--fg-muted) / 0.6); }
+:root.light .text-white\/80 { color: rgb(var(--fg) / 0.9); }
+:root.light .text-white\/75 { color: rgb(var(--fg) / 0.85); }
+:root.light .text-white\/70 { color: rgb(var(--fg) / 0.8); }
+:root.light .text-white\/65 { color: rgb(var(--fg) / 0.75); }
+:root.light .text-white\/60 { color: rgb(var(--fg) / 0.7); }
+:root.light .text-white\/50 { color: rgb(var(--fg-muted) / 0.95); }
+:root.light .text-white\/40 { color: rgb(var(--fg-muted) / 0.8); }
+:root.light .text-white\/30 { color: rgb(var(--fg-muted) / 0.65); }
 
-:root.light .border-white\/10 { border-color: rgb(var(--fg) / 0.1); }
-:root.light .border-white\/20 { border-color: rgb(var(--fg) / 0.15); }
+/* Form placeholders */
+:root.light .placeholder\:text-white\/30::placeholder,
+:root.light .placeholder\:text-white\/40::placeholder,
+:root.light .placeholder\:text-white\/50::placeholder {
+  color: rgb(var(--fg-muted) / 0.55);
+}
+
+/* Hover variants used in nav / buttons */
+:root.light .hover\:text-white:hover { color: rgb(var(--fg)); }
+:root.light .hover\:bg-white\/5:hover { background-color: rgb(var(--fg) / 0.05); }
+:root.light .hover\:bg-white\/10:hover { background-color: rgb(var(--fg) / 0.08); }
+
+:root.light .border-white\/10 { border-color: rgb(var(--fg) / 0.12); }
+:root.light .border-white\/15 { border-color: rgb(var(--fg) / 0.15); }
+:root.light .border-white\/20 { border-color: rgb(var(--fg) / 0.18); }
 
 :root.light .bg-white\/5 { background-color: rgb(var(--fg) / 0.04); }
 :root.light .bg-white\/10 { background-color: rgb(var(--fg) / 0.07); }
 :root.light .bg-white\/20 { background-color: rgb(var(--fg) / 0.1); }
 
-/* Gradient button labels should stay white on colored backgrounds */
-:root.light .bg-gradient-to-r.from-brand .text-white,
-:root.light .bg-gradient-to-br.from-brand .text-white,
-:root.light .from-brand.to-brand-glow {
+/* Buttons with the brand gradient must keep white labels even in light mode.
+   Targeting elements that carry both `from-brand` and `text-white` themselves. */
+:root.light .from-brand.text-white,
+:root.light .from-brand .text-white,
+:root.light .to-brand-glow.text-white,
+:root.light .to-brand-glow .text-white {
   color: #ffffff;
+}
+
+/* Native form controls in light mode */
+:root.light input,
+:root.light textarea,
+:root.light select {
+  color-scheme: light;
 }
