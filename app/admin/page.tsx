@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { FolderKanban, Inbox, Eye } from "lucide-react";
+import { FolderKanban, Inbox, Eye, AlertTriangle } from "lucide-react";
 import { authOptions } from "@/lib/auth";
 import { connectDB, isDbConfigured } from "@/lib/db";
 import { Project } from "@/lib/models/Project";
@@ -11,15 +11,32 @@ export const dynamic = "force-dynamic";
 
 async function getStats() {
   if (!isDbConfigured()) {
-    return { projects: 0, messages: 0, unread: 0, configured: false };
+    return {
+      projects: 0,
+      messages: 0,
+      unread: 0,
+      configured: false,
+      error: null as string | null,
+    };
   }
-  await connectDB();
-  const [projects, messages, unread] = await Promise.all([
-    Project.countDocuments({}),
-    Message.countDocuments({}),
-    Message.countDocuments({ read: false }),
-  ]);
-  return { projects, messages, unread, configured: true };
+  try {
+    await connectDB();
+    const [projects, messages, unread] = await Promise.all([
+      Project.countDocuments({}),
+      Message.countDocuments({}),
+      Message.countDocuments({ read: false }),
+    ]);
+    return { projects, messages, unread, configured: true, error: null };
+  } catch (e) {
+    console.error("[admin stats]", e);
+    return {
+      projects: 0,
+      messages: 0,
+      unread: 0,
+      configured: true,
+      error: (e as Error).message || "Erreur de connexion à la base",
+    };
+  }
 }
 
 export default async function AdminHome() {
@@ -38,7 +55,21 @@ export default async function AdminHome() {
       {!stats.configured && (
         <div className="mt-6 rounded-2xl border border-yellow-500/40 bg-yellow-500/10 p-4 text-sm text-yellow-200">
           <strong>MongoDB non configuré.</strong> Ajoutez <code>MONGODB_URI</code>{" "}
-          dans <code>.env.local</code> puis relancez le serveur.
+          dans vos variables d&apos;environnement.
+        </div>
+      )}
+
+      {stats.error && (
+        <div className="mt-6 flex items-start gap-3 rounded-2xl border border-red-500/40 bg-red-500/10 p-4 text-sm text-red-200">
+          <AlertTriangle className="mt-0.5 h-4 w-4 flex-shrink-0" />
+          <div>
+            <strong>Connexion à MongoDB impossible.</strong>
+            <div className="mt-1 text-xs opacity-80">{stats.error}</div>
+            <div className="mt-2 text-xs opacity-70">
+              Vérifiez : MONGODB_URI correct sur Vercel · Network Access Atlas →
+              0.0.0.0/0 · utilisateur DB valide.
+            </div>
+          </div>
         </div>
       )}
 

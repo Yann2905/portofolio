@@ -22,20 +22,26 @@ export default async function ProjectsAdminPage() {
     year: number;
     tags: string[];
   }[] = [];
+  let dbError: string | null = null;
 
   if (isDbConfigured()) {
-    await connectDB();
-    const docs = await Project.find({})
-      .sort({ order: 1, createdAt: -1 })
-      .lean();
-    projects = docs.map((d) => ({
-      _id: String(d._id),
-      title: d.title,
-      tagline: d.tagline,
-      cover: d.cover,
-      year: d.year,
-      tags: d.tags ?? [],
-    }));
+    try {
+      await connectDB();
+      const docs = await Project.find({})
+        .sort({ order: 1, createdAt: -1 })
+        .lean();
+      projects = docs.map((d) => ({
+        _id: String(d._id),
+        title: d.title,
+        tagline: d.tagline,
+        cover: d.cover,
+        year: d.year,
+        tags: d.tags ?? [],
+      }));
+    } catch (e) {
+      console.error("[admin projects list]", e);
+      dbError = (e as Error).message || "Erreur de connexion à la base";
+    }
   }
 
   return (
@@ -54,7 +60,14 @@ export default async function ProjectsAdminPage() {
         </Link>
       </div>
 
-      {projects.length === 0 ? (
+      {dbError && (
+        <div className="mb-4 rounded-2xl border border-red-500/40 bg-red-500/10 p-4 text-sm text-red-200">
+          <strong>Erreur MongoDB.</strong>{" "}
+          <span className="opacity-80">{dbError}</span>
+        </div>
+      )}
+
+      {projects.length === 0 && !dbError ? (
         <div className="rounded-2xl border border-white/10 bg-bg-card p-10 text-center text-sm text-white/50">
           Aucun projet. Cliquez sur <strong>Nouveau projet</strong> pour
           commencer.
