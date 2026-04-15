@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { skills } from "@/lib/data";
 import type { Skill } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -15,7 +14,7 @@ const categories: Array<Skill["category"] | "Tous"> = [
   "Design",
 ];
 
-export default function SkillsScreen() {
+export default function SkillsScreen({ skills }: { skills: Skill[] }) {
   const [cat, setCat] = useState<(typeof categories)[number]>("Tous");
   const filtered =
     cat === "Tous" ? skills : skills.filter((s) => s.category === cat);

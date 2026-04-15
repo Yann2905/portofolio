@@ -1,11 +1,12 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { FolderKanban, Inbox, Eye, AlertTriangle } from "lucide-react";
+import { FolderKanban, Inbox, Eye, AlertTriangle, Sparkles } from "lucide-react";
 import { authOptions } from "@/lib/auth";
 import { connectDB, isDbConfigured } from "@/lib/db";
 import { Project } from "@/lib/models/Project";
 import { Message } from "@/lib/models/Message";
+import { Skill } from "@/lib/models/Skill";
 
 export const dynamic = "force-dynamic";
 
@@ -13,6 +14,7 @@ async function getStats() {
   if (!isDbConfigured()) {
     return {
       projects: 0,
+      skills: 0,
       messages: 0,
       unread: 0,
       configured: false,
@@ -21,16 +23,18 @@ async function getStats() {
   }
   try {
     await connectDB();
-    const [projects, messages, unread] = await Promise.all([
+    const [projects, skills, messages, unread] = await Promise.all([
       Project.countDocuments({}),
+      Skill.countDocuments({}),
       Message.countDocuments({}),
       Message.countDocuments({ read: false }),
     ]);
-    return { projects, messages, unread, configured: true, error: null };
+    return { projects, skills, messages, unread, configured: true, error: null };
   } catch (e) {
     console.error("[admin stats]", e);
     return {
       projects: 0,
+      skills: 0,
       messages: 0,
       unread: 0,
       configured: true,
@@ -73,12 +77,18 @@ export default async function AdminHome() {
         </div>
       )}
 
-      <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
         <StatCard
           icon={FolderKanban}
           label="Projets"
           value={stats.projects}
           href="/admin/projects"
+        />
+        <StatCard
+          icon={Sparkles}
+          label="Compétences"
+          value={stats.skills}
+          href="/admin/skills"
         />
         <StatCard
           icon={Inbox}

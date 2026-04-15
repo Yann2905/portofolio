@@ -1,7 +1,9 @@
 import { connectDB, isDbConfigured } from "./db";
 import { Project } from "./models/Project";
-import { projects as seedProjects } from "./data";
-import type { Project as ProjectType } from "./types";
+import { Skill } from "./models/Skill";
+import { Config } from "./models/Config";
+import { projects as seedProjects, skills as seedSkills } from "./data";
+import type { Project as ProjectType, Skill as SkillType } from "./types";
 
 function toPlainProject(doc: {
   _id: unknown;
@@ -43,5 +45,34 @@ export async function getProjects(): Promise<ProjectType[]> {
   } catch (e) {
     console.error("[getProjects] falling back to seed:", e);
     return seedProjects;
+  }
+}
+
+export async function getSkills(): Promise<SkillType[]> {
+  if (!isDbConfigured()) return seedSkills;
+  try {
+    await connectDB();
+    const docs = await Skill.find({}).sort({ order: 1, createdAt: -1 }).lean();
+    if (docs.length === 0) return seedSkills;
+    return docs.map((d) => ({
+      name: d.name,
+      level: d.level,
+      category: d.category as SkillType["category"],
+    }));
+  } catch (e) {
+    console.error("[getSkills] falling back to seed:", e);
+    return seedSkills;
+  }
+}
+
+export async function getTheme(): Promise<"dark" | "light"> {
+  if (!isDbConfigured()) return "dark";
+  try {
+    await connectDB();
+    const doc = await Config.findOne({ key: "site" }).lean();
+    return (doc?.theme as "dark" | "light") || "dark";
+  } catch (e) {
+    console.error("[getTheme] falling back to dark:", e);
+    return "dark";
   }
 }

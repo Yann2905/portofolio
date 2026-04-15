@@ -77,14 +77,14 @@ export default async function ProjectsAdminPage() {
           {projects.map((p) => (
             <div
               key={p._id}
-              className="flex items-center gap-4 rounded-2xl border border-white/10 bg-bg-card p-3"
+              className="flex flex-col gap-3 rounded-2xl border border-white/10 bg-bg-card p-3 sm:flex-row sm:items-center sm:gap-4"
             >
-              <div className="relative h-16 w-24 flex-shrink-0 overflow-hidden rounded-xl">
+              <div className="relative h-32 w-full flex-shrink-0 overflow-hidden rounded-xl sm:h-16 sm:w-24">
                 <Image
                   src={p.cover}
                   alt={p.title}
                   fill
-                  sizes="96px"
+                  sizes="(max-width: 640px) 100vw, 96px"
                   className="object-cover"
                 />
               </div>
@@ -105,10 +105,10 @@ export default async function ProjectsAdminPage() {
                   ))}
                 </div>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 sm:flex-shrink-0">
                 <Link
                   href={`/admin/projects/${p._id}/edit`}
-                  className="tap rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-medium text-white/80 hover:bg-white/10"
+                  className="tap flex-1 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-center text-xs font-medium text-white/80 hover:bg-white/10 sm:flex-none"
                 >
                   Modifier
                 </Link>

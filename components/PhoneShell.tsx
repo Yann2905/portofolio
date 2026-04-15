@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useApp } from "@/lib/store";
-import type { Project } from "@/lib/types";
+import type { Project, Skill } from "@/lib/types";
 import StatusBar from "./StatusBar";
 import BottomNav from "./BottomNav";
 import ProjectDetailOverlay from "./ProjectDetailOverlay";
@@ -11,7 +11,13 @@ import ProjectsScreen from "./screens/ProjectsScreen";
 import SkillsScreen from "./screens/SkillsScreen";
 import ContactScreen from "./screens/ContactScreen";
 
-export default function PhoneShell({ projects }: { projects: Project[] }) {
+export default function PhoneShell({
+  projects,
+  skills,
+}: {
+  projects: Project[];
+  skills: Skill[];
+}) {
   const screen = useApp((s) => s.screen);
   const direction = useApp((s) => s.direction);
 
@@ -22,7 +28,7 @@ export default function PhoneShell({ projects }: { projects: Project[] }) {
       case "projects":
         return <ProjectsScreen projects={projects} />;
       case "skills":
-        return <SkillsScreen />;
+        return <SkillsScreen skills={skills} />;
       case "contact":
         return <ContactScreen />;
     }

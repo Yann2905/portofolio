@@ -6,13 +6,41 @@
 
 :root {
   color-scheme: dark;
+  --bg: 10 10 15;
+  --bg-soft: 17 17 24;
+  --bg-card: 21 21 31;
+  --brand: 124 92 255;
+  --brand-soft: 167 139 250;
+  --brand-glow: 91 61 245;
+  --accent: 0 224 199;
+  --fg: 245 245 247;
+  --fg-muted: 161 161 170;
+  --ambient-1: rgba(124, 92, 255, 0.18);
+  --ambient-2: rgba(0, 224, 199, 0.12);
+  --ambient-base: #06060a;
+}
+
+:root.light {
+  color-scheme: light;
+  --bg: 247 251 248;
+  --bg-soft: 238 246 240;
+  --bg-card: 255 255 255;
+  --brand: 16 185 129;
+  --brand-soft: 52 211 153;
+  --brand-glow: 5 150 105;
+  --accent: 13 148 136;
+  --fg: 10 31 20;
+  --fg-muted: 75 93 83;
+  --ambient-1: rgba(16, 185, 129, 0.22);
+  --ambient-2: rgba(13, 148, 136, 0.15);
+  --ambient-base: #f0f7f2;
 }
 
 html,
 body {
   height: 100%;
-  background: #0a0a0f;
-  color: #f5f5f7;
+  background: rgb(var(--bg));
+  color: rgb(var(--fg));
   -webkit-font-smoothing: antialiased;
 }
 
@@ -21,7 +49,6 @@ body {
   overscroll-behavior: none;
 }
 
-/* Custom scrollbar hidden inside the phone */
 .phone-scroll::-webkit-scrollbar {
   display: none;
 }
@@ -30,19 +57,44 @@ body {
   -ms-overflow-style: none;
 }
 
-/* Ambient background */
 .ambient-bg {
   background:
-    radial-gradient(circle at 20% 10%, rgba(124, 92, 255, 0.18), transparent 45%),
-    radial-gradient(circle at 80% 90%, rgba(0, 224, 199, 0.12), transparent 50%),
-    #06060a;
+    radial-gradient(circle at 20% 10%, var(--ambient-1), transparent 45%),
+    radial-gradient(circle at 80% 90%, var(--ambient-2), transparent 50%),
+    var(--ambient-base);
 }
 
-/* Tap feedback utility */
 .tap {
   transition: transform 120ms ease, opacity 120ms ease;
 }
 .tap:active {
   transform: scale(0.96);
   opacity: 0.85;
+}
+
+/* Light mode adapts existing `*-white/X` utilities to a dark-on-light palette
+   without rewriting every component. The dark mode classes remain untouched. */
+:root.light .text-white {
+  color: rgb(var(--fg));
+}
+:root.light .text-white\/90 { color: rgb(var(--fg) / 0.95); }
+:root.light .text-white\/80 { color: rgb(var(--fg) / 0.85); }
+:root.light .text-white\/70 { color: rgb(var(--fg) / 0.75); }
+:root.light .text-white\/60 { color: rgb(var(--fg) / 0.65); }
+:root.light .text-white\/50 { color: rgb(var(--fg-muted) / 0.85); }
+:root.light .text-white\/40 { color: rgb(var(--fg-muted) / 0.75); }
+:root.light .text-white\/30 { color: rgb(var(--fg-muted) / 0.6); }
+
+:root.light .border-white\/10 { border-color: rgb(var(--fg) / 0.1); }
+:root.light .border-white\/20 { border-color: rgb(var(--fg) / 0.15); }
+
+:root.light .bg-white\/5 { background-color: rgb(var(--fg) / 0.04); }
+:root.light .bg-white\/10 { background-color: rgb(var(--fg) / 0.07); }
+:root.light .bg-white\/20 { background-color: rgb(var(--fg) / 0.1); }
+
+/* Gradient button labels should stay white on colored backgrounds */
+:root.light .bg-gradient-to-r.from-brand .text-white,
+:root.light .bg-gradient-to-br.from-brand .text-white,
+:root.light .from-brand.to-brand-glow {
+  color: #ffffff;
 }

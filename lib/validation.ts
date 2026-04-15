@@ -28,3 +28,16 @@ export const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
 });
+
+export const skillSchema = z.object({
+  name: z.string().min(1).max(80),
+  level: z.number().int().min(0).max(100),
+  category: z.enum(["Frontend", "Backend", "Mobile", "DevOps", "Design"]),
+  order: z.number().int().default(0),
+});
+
+export type SkillInput = z.infer<typeof skillSchema>;
+
+export const configSchema = z.object({
+  theme: z.enum(["dark", "light"]),
+});

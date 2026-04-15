@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Toaster } from "sonner";
+import { getTheme } from "@/lib/data-service";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -27,32 +28,40 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0f",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const theme = await getTheme();
+  const isLight = theme === "light";
+
   return (
-    <html lang="fr">
+    <html lang="fr" className={isLight ? "light" : ""}>
       <body className="ambient-bg min-h-screen">
         {children}
         <Toaster
           position="top-center"
-          theme="dark"
+          theme={isLight ? "light" : "dark"}
           duration={1800}
           toastOptions={{
-            style: {
-              background: "#15151f",
-              border: "1px solid rgba(124,92,255,0.35)",
-              color: "#f5f5f7",
-            },
+            style: isLight
+              ? {
+                  background: "#ffffff",
+                  border: "1px solid rgba(16,185,129,0.35)",
+                  color: "#0a1f14",
+                }
+              : {
+                  background: "#15151f",
+                  border: "1px solid rgba(124,92,255,0.35)",
+                  color: "#f5f5f7",
+                },
           }}
         />
       </body>

@@ -6,6 +6,7 @@ const config: Config = {
     "./components/**/*.{ts,tsx}",
     "./lib/**/*.{ts,tsx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       fontFamily: {
@@ -14,16 +15,20 @@ const config: Config = {
       },
       colors: {
         bg: {
-          DEFAULT: "#0a0a0f",
-          soft: "#111118",
-          card: "#15151f",
+          DEFAULT: "rgb(var(--bg) / <alpha-value>)",
+          soft: "rgb(var(--bg-soft) / <alpha-value>)",
+          card: "rgb(var(--bg-card) / <alpha-value>)",
         },
         brand: {
-          DEFAULT: "#7c5cff",
-          soft: "#a78bfa",
-          glow: "#5b3df5",
+          DEFAULT: "rgb(var(--brand) / <alpha-value>)",
+          soft: "rgb(var(--brand-soft) / <alpha-value>)",
+          glow: "rgb(var(--brand-glow) / <alpha-value>)",
         },
-        accent: "#00e0c7",
+        accent: "rgb(var(--accent) / <alpha-value>)",
+        fg: {
+          DEFAULT: "rgb(var(--fg) / <alpha-value>)",
+          muted: "rgb(var(--fg-muted) / <alpha-value>)",
+        },
       },
       boxShadow: {
         phone:

@@ -8,20 +8,23 @@ import {
   LayoutDashboard,
   FolderKanban,
   Inbox,
+  Sparkles,
   LogOut,
   ExternalLink,
   Menu,
   X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import ThemeToggle from "./ThemeToggle";
 
 const items = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/projects", label: "Projets", icon: FolderKanban },
+  { href: "/admin/skills", label: "Compétences", icon: Sparkles },
   { href: "/admin/messages", label: "Messages", icon: Inbox },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ theme }: { theme: "dark" | "light" }) {
   const path = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -59,6 +62,7 @@ export default function Sidebar() {
       </nav>
 
       <div className="space-y-1 border-t border-white/10 pt-4">
+        <ThemeToggle current={theme} />
         <Link
           href="/"
           target="_blank"
@@ -80,12 +84,10 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Desktop sidebar */}
       <aside className="sticky top-0 hidden h-screen w-64 flex-col border-r border-white/10 bg-bg-soft p-5 md:flex">
         {NavContent}
       </aside>
 
-      {/* Mobile header */}
       <header className="sticky top-0 z-30 flex items-center justify-between border-b border-white/10 bg-bg-soft/90 px-4 py-3 backdrop-blur md:hidden">
         <div>
           <div className="font-display text-sm font-bold">DALNOVA</div>
@@ -102,7 +104,6 @@ export default function Sidebar() {
         </button>
       </header>
 
-      {/* Mobile drawer */}
       {open && (
         <div className="fixed inset-0 z-50 md:hidden">
           <div

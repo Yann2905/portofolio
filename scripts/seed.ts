@@ -1,6 +1,6 @@
 import "dotenv/config";
 import mongoose from "mongoose";
-import { projects as seedProjects } from "../lib/data";
+import { projects as seedProjects, skills as seedSkills } from "../lib/data";
 
 const ProjectSchema = new mongoose.Schema(
   {
@@ -52,6 +52,31 @@ async function run() {
   }));
   await Project.insertMany(payload);
   console.log(`✅ ${payload.length} projets insérés.`);
+
+  const SkillSchema = new mongoose.Schema(
+    {
+      name: String,
+      level: Number,
+      category: String,
+      order: { type: Number, default: 0 },
+    },
+    { timestamps: true }
+  );
+  const Skill = mongoose.models.Skill || mongoose.model("Skill", SkillSchema);
+  const skillCount = await Skill.countDocuments({});
+  if (skillCount > 0) {
+    console.log(`⚠️  ${skillCount} compétences déjà présentes. Suppression…`);
+    await Skill.deleteMany({});
+  }
+  const skillPayload = seedSkills.map((s, i) => ({
+    name: s.name,
+    level: s.level,
+    category: s.category,
+    order: i,
+  }));
+  await Skill.insertMany(skillPayload);
+  console.log(`✅ ${skillPayload.length} compétences insérées.`);
+
   await mongoose.disconnect();
 }
 
