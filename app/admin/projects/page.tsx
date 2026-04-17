@@ -46,14 +46,14 @@ export default async function ProjectsAdminPage() {
 
   return (
     <div>
-      <div className="mb-6 flex items-center justify-between">
+      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="font-display text-3xl font-bold">Projets</h1>
+          <h1 className="font-display text-2xl font-bold sm:text-3xl">Projets</h1>
           <p className="mt-1 text-sm text-white/50">{projects.length} projets</p>
         </div>
         <Link
           href="/admin/projects/new"
-          className="tap flex items-center gap-2 rounded-2xl bg-gradient-to-r from-brand to-brand-glow px-4 py-2.5 text-sm font-semibold text-white shadow-glow"
+          className="tap inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-brand to-brand-glow px-4 py-2.5 text-sm font-semibold text-white shadow-glow sm:w-auto"
         >
           <Plus className="h-4 w-4" />
           Nouveau projet

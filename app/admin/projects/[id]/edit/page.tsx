@@ -55,7 +55,7 @@ export default async function EditProjectPage({
 
   return (
     <div>
-      <h1 className="font-display text-3xl font-bold">Modifier le projet</h1>
+      <h1 className="font-display text-2xl font-bold sm:text-3xl">Modifier le projet</h1>
       <p className="mt-1 mb-8 text-sm text-white/50">{initial.title}</p>
       <ProjectForm initial={initial} />
     </div>

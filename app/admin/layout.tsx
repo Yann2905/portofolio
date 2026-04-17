@@ -19,7 +19,7 @@ export default async function AdminLayout({
       {session?.user?.role === "admin" ? (
         <div className="min-h-screen bg-bg md:flex">
           <Sidebar theme={theme} />
-          <main className="flex-1 p-4 md:p-8">{children}</main>
+          <main className="min-w-0 flex-1 p-4 sm:p-6 md:p-8">{children}</main>
         </div>
       ) : (
         <div className="min-h-screen bg-bg">{children}</div>

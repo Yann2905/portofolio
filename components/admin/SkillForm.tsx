@@ -69,7 +69,7 @@ export default function SkillForm({
   };
 
   return (
-    <form onSubmit={submit} className="max-w-2xl space-y-5">
+    <form onSubmit={submit} className="w-full max-w-2xl space-y-5">
       <label className="block">
         <span className="block text-[10px] uppercase tracking-wider text-white/40">
           Nom
@@ -126,11 +126,11 @@ export default function SkillForm({
         />
       </label>
 
-      <div className="flex gap-3 pt-4">
+      <div className="flex flex-col-reverse gap-3 pt-4 sm:flex-row">
         <button
           type="submit"
           disabled={loading}
-          className="tap flex items-center gap-2 rounded-2xl bg-gradient-to-r from-brand to-brand-glow px-6 py-3 text-sm font-semibold text-white shadow-glow disabled:opacity-60"
+          className="tap flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-brand to-brand-glow px-6 py-3 text-sm font-semibold text-white shadow-glow disabled:opacity-60"
         >
           {loading ? (
             <Loader2 className="h-4 w-4 animate-spin" />

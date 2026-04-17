@@ -146,7 +146,7 @@ export default function ProjectForm({
   };
 
   return (
-    <form onSubmit={submit} className="max-w-3xl space-y-5">
+    <form onSubmit={submit} className="w-full max-w-3xl space-y-5">
       <Row>
         <Input
           label="Titre"
@@ -189,26 +189,28 @@ export default function ProjectForm({
       {/* Cover upload */}
       <div>
         <Label>Image de couverture</Label>
-        <div className="mt-1 flex items-center gap-3">
-          {form.cover && (
-            <div className="relative h-20 w-32 overflow-hidden rounded-xl border border-white/10">
-              <Image src={form.cover} alt="cover" fill className="object-cover" />
-            </div>
-          )}
-          <label className="tap flex cursor-pointer items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-xs font-medium text-white/80 hover:bg-white/10">
-            {uploading === "cover" ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              <Upload className="h-4 w-4" />
+        <div className="mt-1 space-y-3">
+          <div className="flex flex-wrap items-center gap-3">
+            {form.cover && (
+              <div className="relative h-20 w-32 overflow-hidden rounded-xl border border-white/10">
+                <Image src={form.cover} alt="cover" fill className="object-cover" />
+              </div>
             )}
-            {form.cover ? "Changer" : "Uploader"}
-            <input
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={handleCoverUpload}
-            />
-          </label>
+            <label className="tap inline-flex cursor-pointer items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-xs font-medium text-white/80 hover:bg-white/10">
+              {uploading === "cover" ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Upload className="h-4 w-4" />
+              )}
+              {form.cover ? "Changer" : "Uploader"}
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleCoverUpload}
+              />
+            </label>
+          </div>
           <Input
             label=""
             value={form.cover}
@@ -335,11 +337,11 @@ export default function ProjectForm({
         />
       </Row>
 
-      <div className="flex gap-3 pt-4">
+      <div className="flex flex-col-reverse gap-3 pt-4 sm:flex-row">
         <button
           type="submit"
           disabled={loading}
-          className="tap flex items-center gap-2 rounded-2xl bg-gradient-to-r from-brand to-brand-glow px-6 py-3 text-sm font-semibold text-white shadow-glow disabled:opacity-60"
+          className="tap flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-brand to-brand-glow px-6 py-3 text-sm font-semibold text-white shadow-glow disabled:opacity-60"
         >
           {loading ? (
             <Loader2 className="h-4 w-4 animate-spin" />

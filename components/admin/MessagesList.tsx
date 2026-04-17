@@ -76,10 +76,10 @@ export default function MessagesList({ initial }: { initial: Msg[] }) {
           >
             <button
               onClick={() => setOpen(isOpen ? null : m._id)}
-              className="flex w-full items-center gap-4 p-4 text-left"
+              className="flex w-full items-center gap-3 p-3 text-left sm:gap-4 sm:p-4"
             >
               <div
-                className={`flex h-9 w-9 items-center justify-center rounded-full ${
+                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${
                   m.read ? "bg-white/5 text-white/40" : "bg-brand/20 text-brand-soft"
                 }`}
               >
@@ -90,29 +90,29 @@ export default function MessagesList({ initial }: { initial: Msg[] }) {
                 )}
               </div>
               <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-baseline gap-x-2">
                   <span className="truncate text-sm font-semibold text-white">
                     {m.name}
                   </span>
-                  <span className="truncate text-xs text-white/40">
-                    · {m.email}
+                  <span className="truncate text-[11px] text-white/40">
+                    {m.email}
                   </span>
                 </div>
                 <div className="truncate text-xs text-white/60">
                   {m.subject}
                 </div>
               </div>
-              <span className="flex-shrink-0 text-[10px] text-white/40">
+              <span className="shrink-0 text-[10px] text-white/40">
                 {new Date(m.createdAt).toLocaleDateString("fr-FR")}
               </span>
             </button>
 
             {isOpen && (
-              <div className="border-t border-white/10 px-4 py-4">
-                <p className="whitespace-pre-wrap text-sm text-white/80">
+              <div className="border-t border-white/10 px-3 py-4 sm:px-4">
+                <p className="whitespace-pre-wrap break-words text-sm text-white/80">
                   {m.message}
                 </p>
-                <div className="mt-4 flex gap-2">
+                <div className="mt-4 flex flex-wrap items-center gap-2">
                   <button
                     onClick={() => toggleRead(m)}
                     disabled={loading === m._id}
@@ -130,6 +130,7 @@ export default function MessagesList({ initial }: { initial: Msg[] }) {
                     onClick={() => del(m._id)}
                     disabled={loading === m._id}
                     className="tap ml-auto rounded-xl border border-red-500/30 bg-red-500/10 p-2 text-red-300 hover:bg-red-500/20"
+                    aria-label="Supprimer"
                   >
                     {loading === m._id ? (
                       <Loader2 className="h-4 w-4 animate-spin" />

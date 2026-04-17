@@ -11,7 +11,7 @@ export default async function NewProjectPage() {
 
   return (
     <div>
-      <h1 className="font-display text-3xl font-bold">Nouveau projet</h1>
+      <h1 className="font-display text-2xl font-bold sm:text-3xl">Nouveau projet</h1>
       <p className="mt-1 mb-8 text-sm text-white/50">
         Ajoutez un projet au portfolio
       </p>

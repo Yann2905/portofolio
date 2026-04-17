@@ -39,7 +39,7 @@ export default async function EditSkillPage({
 
   return (
     <div>
-      <h1 className="font-display text-3xl font-bold">Modifier la compétence</h1>
+      <h1 className="font-display text-2xl font-bold sm:text-3xl">Modifier la compétence</h1>
       <p className="mt-1 mb-8 text-sm text-white/50">{initial.name}</p>
       <SkillForm initial={initial} />
     </div>

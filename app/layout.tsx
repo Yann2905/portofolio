@@ -30,8 +30,6 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
 };
 
 export default async function RootLayout({
@@ -43,7 +41,7 @@ export default async function RootLayout({
   const isLight = theme === "light";
 
   return (
-    <html lang="fr" className={isLight ? "light" : ""}>
+    <html lang="fr" className={`scroll-smooth ${isLight ? "light" : ""}`}>
       <body className="ambient-bg min-h-screen">
         {children}
         <Toaster

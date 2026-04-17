@@ -11,7 +11,7 @@ export default async function NewSkillPage() {
 
   return (
     <div>
-      <h1 className="font-display text-3xl font-bold">Nouvelle compétence</h1>
+      <h1 className="font-display text-2xl font-bold sm:text-3xl">Nouvelle compétence</h1>
       <p className="mt-1 mb-6 text-sm text-white/50">
         Ajouter une compétence au portfolio
       </p>
