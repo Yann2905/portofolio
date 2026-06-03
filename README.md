@@ -191,4 +191,4 @@ Déposez votre photo dans `public/yann.jpg` (carré, 400×400 min). Sans photo, 
 
 ---
 
-© 2025 DALNOVA — Daloa, Côte d'Ivoire
+© 2026 Yann Aristide Telessie — Daloa, Côte d'Ivoire

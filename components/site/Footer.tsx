@@ -53,7 +53,7 @@ export default function Footer() {
             title="Admin"
             className="text-[11px] text-white/30 transition-colors hover:text-brand-soft"
           >
-            © {new Date().getFullYear()} {profile.company} — Tous droits réservés
+            © {new Date().getFullYear()} {profile.name} — Tous droits réservés
           </a>
         </div>
       </div>

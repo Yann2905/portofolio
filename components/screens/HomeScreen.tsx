@@ -55,7 +55,7 @@ export default function HomeScreen() {
         animate="show"
         className="mt-2 text-sm font-medium text-white/70"
       >
-        {profile.role} · DG {profile.company}
+        {profile.role}
       </motion.p>
 
       <motion.div
@@ -76,9 +76,8 @@ export default function HomeScreen() {
         animate="show"
         className="mt-5 text-sm leading-relaxed text-white/65"
       >
-        {profile.tagline} J'accompagne entreprises et particuliers dans la
-        conception et la mise en production de plateformes web & mobiles sur
-        mesure, pensées comme des produits digitaux complets.
+        {profile.tagline} Je conçois des solutions SaaS et des applications
+        métier — du web au mobile — pensées pour des utilisateurs réels.
       </motion.p>
 
       <motion.div
@@ -135,7 +134,7 @@ export default function HomeScreen() {
         className="mt-auto pt-6 text-center text-[10px] text-white/30 transition-colors hover:text-brand-soft"
         title="Admin"
       >
-        © 2025 DALNOVA — Daloa, CI
+        © {new Date().getFullYear()} {profile.shortName} — Daloa, CI
       </motion.a>
     </div>
   );

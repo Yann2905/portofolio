@@ -33,7 +33,7 @@ export default function LoginForm() {
     <div className="flex min-h-screen items-center justify-center px-4">
       <div className="w-full max-w-sm rounded-3xl border border-white/10 bg-bg-card/70 p-8 backdrop-blur">
         <div className="mb-6 text-center">
-          <div className="font-display text-2xl font-bold">DALNOVA</div>
+          <div className="font-display text-2xl font-bold">Yann Telessie</div>
           <div className="text-[11px] uppercase tracking-widest text-brand-soft">
             Admin Login
           </div>

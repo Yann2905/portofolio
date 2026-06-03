@@ -31,7 +31,7 @@ export default function Sidebar({ theme }: { theme: "dark" | "light" }) {
   const NavContent = (
     <>
       <div className="mb-8">
-        <div className="font-display text-lg font-bold">DALNOVA</div>
+        <div className="font-display text-lg font-bold">Yann Telessie</div>
         <div className="text-[11px] uppercase tracking-widest text-white/40">
           Admin Panel
         </div>
@@ -90,7 +90,7 @@ export default function Sidebar({ theme }: { theme: "dark" | "light" }) {
 
       <header className="sticky top-0 z-30 flex items-center justify-between border-b border-white/10 bg-bg-soft/90 px-4 py-3 backdrop-blur md:hidden">
         <div>
-          <div className="font-display text-sm font-bold">DALNOVA</div>
+          <div className="font-display text-sm font-bold">Yann Telessie</div>
           <div className="text-[9px] uppercase tracking-widest text-white/40">
             Admin
           </div>

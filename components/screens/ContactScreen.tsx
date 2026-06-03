@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Loader2, Send, Mail, MapPin, Building2 } from "lucide-react";
+import { Loader2, Send, Mail, MapPin, Phone } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
 import { profile } from "@/lib/data";
@@ -65,7 +65,7 @@ export default function ContactScreen() {
       </p>
 
       <div className="mt-4 grid grid-cols-1 gap-2">
-        <InfoRow icon={Building2} label={profile.company} value={profile.title} />
+        <InfoRow icon={Phone} label="Téléphone" value={profile.phone} />
         <InfoRow icon={MapPin} label="Localisation" value={profile.location} />
         <InfoRow icon={Mail} label="Email" value={profile.email} />
       </div>

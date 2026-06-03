@@ -55,7 +55,7 @@ export default function AboutSection() {
                     {profile.title}
                   </div>
                   <div className="truncate text-sm font-semibold text-white">
-                    {profile.company} — {profile.location}
+                    {profile.location}
                   </div>
                 </div>
               </div>

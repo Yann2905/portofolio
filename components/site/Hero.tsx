@@ -52,9 +52,9 @@ export default function Hero() {
           {...fadeUp(2)}
           className="mt-7 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg"
         >
-          {profile.role}, fondateur de <span className="text-white">{profile.company}</span>.
-          J&apos;aide entreprises et fondateurs à passer de l&apos;idée au produit en
-          production — web, mobile, et infrastructure.
+          {profile.role}. Je conçois des solutions <span className="text-white">SaaS</span> et
+          des applications métier — du web au mobile — et je les emmène jusqu&apos;en
+          production, pour des utilisateurs réels.
         </motion.p>
 
         <motion.div

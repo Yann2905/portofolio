@@ -4,24 +4,25 @@ import { getTheme } from "@/lib/data-service";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Yann Aristide Telessie — Développeur & DG DALNOVA",
+  title: "Yann Aristide Telessie — Développeur Full Stack Web & Mobile",
   description:
-    "Portfolio interactif de Yann Aristide Telessie, développeur web & mobile, entrepreneur et Directeur Général de DALNOVA. Solutions digitales modernes depuis Daloa, Côte d'Ivoire.",
+    "Portfolio de Yann Aristide Telessie, développeur Full Stack web & mobile (Next.js, Laravel, Flutter, Supabase). Solutions SaaS et applications métier depuis Daloa, Côte d'Ivoire.",
   keywords: [
     "Yann Telessie",
-    "DALNOVA",
+    "développeur full stack",
     "développeur web",
     "développeur mobile",
     "Côte d'Ivoire",
     "Daloa",
     "Next.js",
-    "React",
+    "Laravel",
+    "Flutter",
   ],
   authors: [{ name: "Yann Aristide Telessie" }],
   openGraph: {
     title: "Yann Aristide Telessie — Portfolio",
     description:
-      "Développeur web & mobile, DG de DALNOVA. Création d'applications performantes et immersives.",
+      "Développeur Full Stack web & mobile (Next.js, Laravel, Flutter, Supabase). Solutions SaaS et applications métier.",
     type: "website",
     locale: "fr_FR",
   },
